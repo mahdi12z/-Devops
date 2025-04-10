@@ -21,7 +21,7 @@ First, let’s deploy a sample application to demonstrate the setup.
 
  2. reate a MetalLB Config: The installation manifest does **not** include a configuration file. MetalLB’s components although will start, they will remain idle until we provide the required configuration as an `IpAddressPool`, a new `Kind` introduced in this version and replaced the old way of provisioning address pool configuration with `ConfigMap`.
     Let’s name it `ipaddresspool.yaml`:
-    ```yaml
+```yaml
 apiVersion: metallb.io/v1beta1  
 kind: IPAddressPool  
 metadata:  
