@@ -4,12 +4,12 @@ First, let’s deploy a sample application to demonstrate the setup.
 
 1. **Deploy a Sample Deployment**:
 
- ```bash
+```bash
  kubectl create deployment hello-world --image=gcr.io/google-samples/hello-app:1.0
 ```
     2.**Expose the Deployment as a Service**:
     
-  ```bash
+```bash
    kubectl expose deployment hello-world --type=NodePort --port=8080
 ```
 #### Step 2: Install MetalLB
