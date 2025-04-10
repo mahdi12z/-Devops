@@ -7,7 +7,7 @@ First, let’s deploy a sample application to demonstrate the setup.
 ```bash
  kubectl create deployment hello-world --image=gcr.io/google-samples/hello-app:1.0
 ```
-    2.**Expose the Deployment as a Service**:
+ 2.**Expose the Deployment as a Service**:
     
 ```bash
    kubectl expose deployment hello-world --type=NodePort --port=8080
