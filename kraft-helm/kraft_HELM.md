@@ -105,3 +105,49 @@ https://github.com/strimzi/strimzi-kafka-operator/tree/main/examples
 https://github.com/strimzi/strimzi-kafka-operator/tree/main/examples/kafka/kraft
 
 ```
+
+-----
+## KAFKA UI
+## Kafka UI Deployment Guide on Kubernetes (with Strimzi & Helm)
+### Step 1: Add Kafka UI Helm Repository
+```bash
+helm repo add kafka-ui https://provectus.github.io/kafka-ui-charts
+helm repo update
+```
+ Step 2: Create the kafka-ui-values.yaml file
+```bash
+kafka:
+  clusters:
+    - name: kraft
+      bootstrapServers: my-cluster-kafka-bootstrap:9092
+
+env:
+  - name: DYNAMIC_CONFIG_ENABLED
+    value: "true"
+
+service:
+  type: NodePort
+  nodePort: 30080
+```
+Replace my-cluster-kafka-bootstrap:9092 with the correct bootstrap service from your Strimzi Kafka deployment (usually in the format <cluster-name>-kafka-bootstrap:9092)
+### Step 3: Install Kafka UI with Helm
+```bash
+helm install kafka-ui kafka-ui/kafka-ui \
+  --namespace kafka \
+  -f kafka-ui-values.yaml
+```
+To update an existing deployment:
+```bash
+helm upgrade kafka-ui kafka-ui/kafka-ui \
+  --namespace kafka \
+  -f kafka-ui-values.yaml
+```
+### Step 4: Access Kafka UI
+#### 1.Get the Node IP:
+```bash
+kubectl get nodes -o wide
+```
+#### 2.Open in your browser:
+```bash
+http://<NODE-IP>:30080
+```
