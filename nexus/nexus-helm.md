@@ -61,7 +61,7 @@ http://<NODE-IP>:32462
 
 
 
-``bash
+```bash
 
 kubectl patch svc my-nexus3 -n nexus --type='merge' -p '
 {
@@ -81,7 +81,7 @@ kubectl patch svc my-nexus3 -n nexus --type='merge' -p '
 
 
 
-``
+```
 
 
 
