@@ -38,6 +38,11 @@ To deploy a single-node Apache Kafka cluster in KRaft mode, apply the following 
 ```bash
 kubectl apply -f https://strimzi.io/examples/latest/kafka/kraft/kafka-single-node.yaml -n kafka
 ```
+```bash
+kubectl apply -f https://github.com/strimzi/strimzi-kafka-operator/blob/main/examples/kafka/kraft/kafka.yaml -n kafka
+```
+
+
 
 Wait until the Kafka cluster is fully ready:
 ```bash
