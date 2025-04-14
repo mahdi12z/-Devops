@@ -83,18 +83,20 @@ kubectl patch svc my-nexus3 -n nexus --type='merge' -p '
 
 ```
 
+```
+32500
+```
 
 
-sudo vi /etc/docker/daemon.json
 
-``bash
+```bash
 {
   "insecure-registries": [
     "192.168.100.*:32500"
   ]
 }
-``
-``bash
+```
+```bash
 sudo systemctl restart docker
 docker login 192.168.100.94:32500
 ``
