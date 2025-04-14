@@ -56,3 +56,48 @@ Then open your browser and access:
 ```
 http://<NODE-IP>:32462
 ```
+
+
+
+
+
+``bash
+
+kubectl patch svc my-nexus3 -n nexus --type='merge' -p '
+{
+  "spec": {
+    "type": "NodePort",
+    "ports": [
+      {
+        "name": "docker-registry",
+        "port": 5000,
+        "targetPort": 5000,
+        "protocol": "TCP",
+        "nodePort": 32500
+      }
+    ]
+  }
+}'
+
+
+
+``
+
+
+
+sudo vi /etc/docker/daemon.json
+
+``bash
+{
+  "insecure-registries": [
+    "192.168.100.*:32500"
+  ]
+}
+``
+``bash
+sudo systemctl restart docker
+docker login 192.168.100.94:32500
+``
+
+
+
