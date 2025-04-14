@@ -85,6 +85,7 @@ kubectl patch svc my-nexus3 -n nexus --type='merge' -p '
 
 ```
 32500
+http>>5000
 ```
 
 
