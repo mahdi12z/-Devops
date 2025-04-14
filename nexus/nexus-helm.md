@@ -3,21 +3,21 @@
 ### 1.  Add Sonatype Helm Repo
 
 ```bash
-helm repo add sonatype https://sonatype.github.io/helm3-charts/
+helm repo add stevehipwell https://stevehipwell.github.io/helm-charts/
 helm repo update
 ```
 
 ### 2.  Create a Namespace
 
 ```
-`kubectl create namespace nexus`
+kubectl create namespace nexus
 ```
 
 ### 3.  Install Nexus Repository Manager
 
 Install Nexus with Helm and expose using a ClusterIP first:
 ```bash
-helm install my-nexus-repository-manager sonatype/nexus-repository-manager -n nexus
+helm install my-nexus3 stevehipwell/nexus3 -n nexus
 
 ```
 
@@ -26,7 +26,8 @@ helm install my-nexus-repository-manager sonatype/nexus-repository-manager -n ne
 Patch the service to make it accessible via NodePort:
 
 ```
-`kubectl patch svc my-nexus-repository-manager -n nexus -p '{"spec": {"type": "NodePort"}}'`
+kubectl get svc -n nexus
+kubectl patch svc my-nexus3  -n nexus -p '{"spec": {"type": "NodePort"}}'
 ```
 
 ### 5. Get the Admin Password
@@ -38,7 +39,7 @@ kubectl exec -n nexus -it <nexus-pod-name> -- cat /nexus-data/admin.password
 You can find the pod name with:
 
 ```
-`kubectl get pods -n nexus`
+kubectl get pods -n nexus
 ```
 
 6.  Access the Web Interface
