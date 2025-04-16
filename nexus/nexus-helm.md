@@ -57,9 +57,9 @@ Then open your browser and access:
 http://<NODE-IP>:32462
 ```
 
+## kubectl patch svc
 
-
-
+This command updates the my-nexus3 service (in the nexus namespace) to expose it as a NodePort service.
 
 ```bash
 
@@ -79,16 +79,31 @@ kubectl patch svc my-nexus3 -n nexus --type='merge' -p '
   }
 }'
 
-
-
 ```
+
+type: NodePort: Makes the service accessible outside the cluster.
+
+port: 5000: The port exposed by the service inside the cluster.
+
+targetPort: 5000: The port on the actual pod (Nexus3 container).
+
+nodePort: 32500: The external port on the node (host machine). You can access the service via http://<node-ip>:32500.
+
+
+
+----
+ ## 32500 → 5000
+
+This means HTTP requests sent to NODE_IP:32500 will be forwarded to port 5000 inside the pod running Nexus3.
+
 
 ```
 32500
 http>>5000
 ```
+----
 
-
+## Docker insecure registry config
 
 ```bash
 {
@@ -99,7 +114,7 @@ http>>5000
 ```
 ```bash
 sudo systemctl restart docker
-docker login 192.168.100.94:32500
+docker login 192.168.100.*:32500
 ``
 
 
